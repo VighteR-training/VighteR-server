@@ -8,7 +8,7 @@ let movementModel = require('../models/Movement')
 
 let chai = require('chai')
 let chaiHttp = require('chai-http')
-let server = require('../MockServer2')
+let server = require('../MockServer')
 let should = chai.should()
 
 chai.use(chaiHttp)
@@ -28,7 +28,7 @@ describe('Move and movement', () => {
   // })
 
 
-  describe('/POST gyroscopes', () => {
+  describe('/POST should return success Move post', () => {
     it('should return success Move post', (done) => {
       let mockId = new movementModel({ name: 'jab' })
 
@@ -52,7 +52,7 @@ describe('Move and movement', () => {
 
 
 
-  describe('/DELETE/:id gyroscope', () => {
+  describe('/DELETE/:id should deleted gyro data with matching id', () => {
     it('should deleted gyro data with matching id', (done) => {
       let gyro = new movementModel({ name: 'hook' })
       gyro.save((err, gyro) => {
@@ -68,7 +68,7 @@ describe('Move and movement', () => {
   })
 
 
-  describe('/POST move', () => {
+  describe('/POST/moveandmovement should not POST withot x fields', () => {
     it('should not POST withot x fields', (done) => {
       let mockId = new movementModel({ name: 'jab' })
       let move = new Move({ y: 2, z: 2, power: 999 })
@@ -85,7 +85,7 @@ describe('Move and movement', () => {
     })
   })
 
-  describe('/POST gyroscopes', () => {
+  describe('/POST/moveandmovement should not POST withot y fields', () => {
     it('should not POST withot y fields', (done) => {
       let mockId = new movementModel({ name: 'jab' })
       let move = new Move({ x: 2, z: 2, power: 999 })
@@ -102,7 +102,7 @@ describe('Move and movement', () => {
     })
   })
 
-  describe('/POST gyroscopes', () => {
+  describe('/POST/moveandmovement should not POST withot z fields', () => {
     it('should not POST withot z fields', (done) => {
       let mockId = new movementModel({ name: 'jab' })
       let move = new Move({ x: 2, y: 2, power: 999 })
@@ -119,7 +119,7 @@ describe('Move and movement', () => {
     })
   })
 
-  describe('/POST gyroscopes', () => {
+  describe('/POST/moveandmovement should not POST withot power fields', () => {
     it('should not POST withot power fields', (done) => {
       let mockId = new movementModel({ name: 'jab' })
       let move = new Move({ x: 2, y: 2, z: 999 })
@@ -136,7 +136,7 @@ describe('Move and movement', () => {
     })
   })
 
-  describe('/POST add movement name', () => {
+  describe('/POST/moveandmovement add movement name should success', () => {
     it('should success', (done) => {
       let movement = new movementModel({name:'jab'})
       chai.request(server)
@@ -150,7 +150,7 @@ describe('Move and movement', () => {
     })
   })
 
-  describe('/GET gyroscpes', () => {
+  describe('/GET/moveandmovement it should return all of gyroscopes', () => {
     it('it should return all of gyroscopes', (done) => {
       chai.request(server)
         .get('/movements')
