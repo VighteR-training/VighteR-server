@@ -25,10 +25,7 @@ describe('Users', () => {
 
   describe('/POST/register should not POST without username field',()=>{
     it('should not POST without username field',(done)=>{
-      let user={
-        email:'email@testmail.com',
-        password:'password123'
-      }
+      let user=new User({email:'test@mail.com',password:'password'})
       chai.request(server)
       .post('/register')
       .send(user)
@@ -46,10 +43,7 @@ describe('Users', () => {
 
   describe('/POST/register should not POST without email field',()=>{
     it('should not POST without email field',(done)=>{
-      let user={
-        username:'email@testmail.com',
-        password:'password123'
-      }
+      let user=new User({username:'test@mail.com',password:'password'})
       chai.request(server)
       .post('/register')
       .send(user)
@@ -67,10 +61,7 @@ describe('Users', () => {
 
   describe('/POST/register should not POST without password field',()=>{
     it('should not POST without password field',(done)=>{
-      let user={
-        email:'email@testmail.com',
-        username:'password123'
-      }
+      let user=new User({email:'test@mail.com',username:'username'})
       chai.request(server)
       .post('/register')
       .send(user)
