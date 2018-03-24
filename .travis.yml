@@ -1,24 +1,17 @@
-# set languange and version
 language: node_js
 node_js:
 - "stable"
 
-# something to do before install
 before_install:
-# decrypting encripted credentials ==> output credentials.tar.gz
 - openssl aes-256-cbc -K $encrypted_ff89aee72785_key -iv $encrypted_ff89aee72785_iv
   -in credentials.tar.gz.enc -out credentials.tar.gz -d
-# extracting credentials ==> output client-secret.json 
 - tar -xzf credentials.tar.gz
-# installing yarn
 - npm i -g yarn
 
 install:
-# installing dependencies
 - yarn
 
 script:
-# running test
 - yarn test
 
 deploy:
