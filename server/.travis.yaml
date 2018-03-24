@@ -24,4 +24,4 @@ script:
 deploy:
   provider: gae
   keyfile: client-secret.json
-  project: VighteR-server
+  project: alangLab
