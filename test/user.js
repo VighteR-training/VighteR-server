@@ -17,11 +17,11 @@ chai.use(chaiHttp)
 
 describe('Users', () => {
 
-  beforeEach((done) => {
-    User.remove({}, (err) => {
-      done()
-    })
-  })
+  // beforeEach((done) => {
+  //   User.remove({}, (err) => {
+  //     done()
+  //   })
+  // })
 
   describe('/POST/register should not POST without username field',()=>{
     it('should not POST without username field',(done)=>{
