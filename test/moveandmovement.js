@@ -15,17 +15,11 @@ chai.use(chaiHttp)
 
 describe('Move and movement', () => {
 
-  // beforeEach((done) => {
-  //   movementModel.remove({}, (err) => {
-  //   })
-  //   Move.remove({}, (err) => {
-  //   })
-  //   History.remove({}, (err) => {
-  //   })
-  //   User.remove({}, (err) => {
-  //   })
-  //   done()
-  // })
+  beforeEach((done) => {
+    movementModel.remove({}, (err) => {
+      done()
+    })
+  })
 
 
   describe('/POST should return success Move post', () => {
