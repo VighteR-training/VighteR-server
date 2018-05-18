@@ -13,31 +13,25 @@ let should = chai.should()
 
 chai.use(chaiHttp)
 
-describe('Move and movement', () => {
+describe('Move and movement', function()  {
 
-  // beforeEach((done) => {
-  //   movementModel.remove({}, (err) => {
-  //   })
-  //   Move.remove({}, (err) => {
-  //   })
-  //   History.remove({}, (err) => {
-  //   })
-  //   User.remove({}, (err) => {
-  //   })
-  //   done()
-  // })
+  beforeEach(function(done)  {
+    movementModel.remove({}, function(err)  {
+      done()
+    })
+  })
 
 
-  describe('/POST should return success Move post', () => {
-    it('should return success Move post', (done) => {
+  describe('/POST should return success Move post', function()  {
+    it('should return success Move post', function(done)  {
       let mockId = new movementModel({ name: 'jab' })
 
       let move = new Move({ x: 1, y: 2, z: 9, power: 9999 })
-      mockId.save((err, mock) => {
+      mockId.save(function(err, mock) {
         chai.request(server)
           .post(`/movements/${mock.id}/addMove`)
           .send(move)
-          .end((err, res) => {
+          .end(function(err, res) {
             console.log('ini id yg dicari', mock.id)
             console.log('ini move', move)
             console.log('ini mock', mock)
@@ -52,13 +46,13 @@ describe('Move and movement', () => {
 
 
 
-  describe('/DELETE/:id should deleted gyro data with matching id', () => {
-    it('should deleted gyro data with matching id', (done) => {
+  describe('/DELETE/:id should deleted gyro data with matching id',function ()  {
+    it('should deleted gyro data with matching id', function(done) {
       let gyro = new movementModel({ name: 'hook' })
-      gyro.save((err, gyro) => {
+      gyro.save(function(err, gyro)  {
         chai.request(server)
           .delete('/movements/' + gyro.id + '/deleteMovement')
-          .end((err, res) => {
+          .end(function(err, res)  {
             res.should.have.status(200)
             res.body.should.have.property('status').eql('deleted ok')
             done()
@@ -68,15 +62,15 @@ describe('Move and movement', () => {
   })
 
 
-  describe('/POST/moveandmovement should not POST withot x fields', () => {
-    it('should not POST withot x fields', (done) => {
+  describe('/POST/moveandmovement should not POST withot x fields',function ()  {
+    it('should not POST withot x fields', function(done)  {
       let mockId = new movementModel({ name: 'jab' })
       let move = new Move({ y: 2, z: 2, power: 999 })
-      mockId.save((err, mock) => {
+      mockId.save(function(err, mock)  {
         chai.request(server)
           .post(`/movements/${mock.id}/addMove`)
           .send(move)
-          .end((err, res) => {
+          .end(function(err, res)  {
             res.should.have.status(500)
             res.body.should.be.a('object')
             done()
@@ -85,15 +79,15 @@ describe('Move and movement', () => {
     })
   })
 
-  describe('/POST/moveandmovement should not POST withot y fields', () => {
-    it('should not POST withot y fields', (done) => {
+  describe('/POST/moveandmovement should not POST withot y fields',function ()  {
+    it('should not POST withot y fields', function(done)  {
       let mockId = new movementModel({ name: 'jab' })
       let move = new Move({ x: 2, z: 2, power: 999 })
-      mockId.save((err, mock) => {
+      mockId.save(function(err, mock)  {
         chai.request(server)
           .post(`/movements/${mock.id}/addMove`)
           .send(move)
-          .end((err, res) => {
+          .end(function(err, res)  {
             res.should.have.status(500)
             res.body.should.be.a('object')
             done()
@@ -102,15 +96,15 @@ describe('Move and movement', () => {
     })
   })
 
-  describe('/POST/moveandmovement should not POST withot z fields', () => {
-    it('should not POST withot z fields', (done) => {
+  describe('/POST/moveandmovement should not POST withot z fields', function()  {
+    it('should not POST withot z fields', function(done)  {
       let mockId = new movementModel({ name: 'jab' })
       let move = new Move({ x: 2, y: 2, power: 999 })
-      mockId.save((err, mock) => {
+      mockId.save(function(err, mock)  {
         chai.request(server)
           .post(`/movements/${mock.id}/addMove`)
           .send(move)
-          .end((err, res) => {
+          .end(function(err, res)  {
             res.should.have.status(500)
             res.body.should.be.a('object')
             done()
@@ -119,15 +113,15 @@ describe('Move and movement', () => {
     })
   })
 
-  describe('/POST/moveandmovement should not POST withot power fields', () => {
-    it('should not POST withot power fields', (done) => {
+  describe('/POST/moveandmovement should not POST withot power fields', function()  {
+    it('should not POST withot power fields', function(done)  {
       let mockId = new movementModel({ name: 'jab' })
       let move = new Move({ x: 2, y: 2, z: 999 })
-      mockId.save((err, mock) => {
+      mockId.save(function(err, mock)  {
         chai.request(server)
           .post(`/movements/${mock.id}/addMove`)
           .send(move)
-          .end((err, res) => {
+          .end(function(err, res)  {
             res.should.have.status(500)
             res.body.should.be.a('object')
             done()
@@ -136,13 +130,13 @@ describe('Move and movement', () => {
     })
   })
 
-  describe('/POST/moveandmovement add movement name should success', () => {
-    it('should success', (done) => {
+  describe('/POST/moveandmovement add movement name should success',function ()  {
+    it('should success', function(done)  {
       let movement = new movementModel({name:'jab'})
       chai.request(server)
         .post('/movements')
         .send(movement)
-        .end((err, res) => {
+        .end(function(err, res)  {
           res.should.have.status(200)
           res.body.should.be.a('object')
           done()
@@ -150,11 +144,11 @@ describe('Move and movement', () => {
     })
   })
 
-  describe('/GET/moveandmovement it should return all of gyroscopes', () => {
-    it('it should return all of gyroscopes', (done) => {
+  describe('/GET/moveandmovement it should return all of gyroscopes',function ()  {
+    it('it should return all of gyroscopes', function(done)  {
       chai.request(server)
         .get('/movements')
-        .end((err, res) => {
+        .end(function(err, res)  {
           res.should.have.status(200)
           res.body.movements.should.be.a('array')
           done()
